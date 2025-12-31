@@ -62,15 +62,18 @@ module.exports.createListing = async (req, res) => {
 
   // 🌍 GEOCODING
   const geoResponse = await axios.get(
-    "https://nominatim.openstreetmap.org/search",
-    {
-      params: {
-        q: `${location}, ${country}`,
-        format: "json",
-        limit: 1
-      }
+  "https://nominatim.openstreetmap.org/search",
+  {
+    params: {
+      q: `${location}, ${country}`,
+      format: "json",
+      limit: 1
+    },
+    headers: {
+      "User-Agent": "StayYourWay/1.0 (contact: 9014281630)"
     }
-  );
+  }
+);
 
   if (!geoResponse.data.length) {
     req.flash("error", "Invalid location");

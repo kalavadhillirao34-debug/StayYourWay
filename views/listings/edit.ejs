@@ -1,0 +1,80 @@
+
+<% layout('layouts/boilerplate') -%>
+
+  <div class="row">
+    <div class="col-6 offset-3">
+      <div class="new-listing-card animate-form">
+      <h3>Edit Listing</h3>
+
+      <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" enctype="multipart/form-data"
+        class="needs-validation" novalidate>
+
+
+        <div class="mb-3">
+          <label class="form-label">Title</label>
+          <input name="listing[title]" class="form-control" value="<%= listing.title %>" required />
+        </div>
+
+
+        <div class="mb-3">
+          <label class="form-label">Description</label>
+          <textarea name="listing[description]" class="form-control" required><%= listing.description %></textarea>
+        </div>
+
+        <% if (listing.image && listing.image.url) { %>
+          <div class="mb-3">
+            <label class="form-label">Current Image</label>
+            <br>
+            <img src="<%= listing.image.url.replace('/upload', '/upload/w_300,h_200,c_fill,q_auto,f_auto') %>"
+              class="img-fluid rounded" alt="Current Listing Image" />
+          </div>
+          <% } %>
+
+
+            <div class="mb-3">
+              <label class="form-label">Replace Image</label>
+              <input type="file" name="image" class="form-control" />
+            </div>
+
+          <div class="row">
+            <div class="mb-3 col-md-4">
+              <label class="form-label">Price</label>
+              <input name="listing[price]" class="form-control" value="<%= listing.price %>" required />
+            </div>
+
+            <div class="mb-3 col-md-8">
+              <label class="form-label">Location</label>
+              <input name="listing[location]" class="form-control" value="<%= listing.location %>" required />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="mb-3 col-md-4">
+              <label class="form-label">Country</label>
+              <input name="listing[country]" class="form-control" value="<%= listing.country %>" required />
+            </div>
+
+            <div class="mb-3 col-md-8">
+              <label class="form-label">Category</label>
+              <select name="listing[category]" class="form-select">
+                <% const categories=[ "beach" ,"mountain","city","cabin","camping","luxury", "island"
+                  ,"ski","desert","lake","forest","historic" ]; %>
+
+                  <% for (let cat of categories) { %>
+                    <option value="<%= cat %>" <%=listing.category===cat ? "selected" : "" %>
+                      >
+                      <%= cat.charAt(0).toUpperCase() + cat.slice(1) %>
+                    </option>
+                    <% } %>
+              </select>
+            </div>
+            </div>
+
+
+            <button class="btn btn-dark add-btn">
+              Update Listing
+            </button>
+      </form>
+      
+    </div>
+  </div>

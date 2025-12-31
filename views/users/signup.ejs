@@ -1,0 +1,144 @@
+<!-- <% layout('layouts/boilerplate') -%>
+<%= currentUser ? currentUser.username : "Not logged in" %>
+
+<div class="row mt-4">
+    <div class="new-listing-card animate-form">
+    <div class="col-6 offset-3">
+
+        <h1 class="mb-4">Sign Up on Stay Your Way</h1>
+
+        <form action="/signup" method="POST" class="needs-validation" novalidate>
+
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input 
+                    name="username"
+                    id="username"
+                    type="text"
+                    class="form-control"
+                    required
+                />
+                <div class="valid-feedback">
+                    Looks good!.
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input 
+                    name="email"
+                    id="email"
+                    type="email"
+                    class="form-control"
+                    required
+                />
+                <div class="invalid-feedback">
+                    Please enter a valid email.
+                </div>
+            </div>
+
+       
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input 
+                    name="password"
+                    id="password"
+                    type="password"
+                    class="form-control"
+                    required
+                />
+                <div class="invalid-feedback">
+                    Password is required.
+                </div>
+            </div>
+
+            <button class="btn btn-success">Sign Up</button>
+        </form>
+
+    </div>
+    </div>
+</div> -->
+
+
+<% layout('layouts/boilerplate') -%>
+
+<div class="auth-page">
+
+  <div class="auth-card animate-form">
+
+    <!-- Heading -->
+    <h2 class="auth-title">Create your account</h2>
+    <p class="auth-subtitle">
+      Join <b>Stay Your Way</b> and start hosting or exploring
+    </p>
+
+    <form action="/signup" method="POST" class="needs-validation" novalidate>
+
+      <!-- Username -->
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input
+          name="username"
+          id="username"
+          type="text"
+          class="form-control"
+          placeholder="Choose a unique username"
+          required
+        />
+        <div class="invalid-feedback">
+          Username is required
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input
+          name="email"
+          id="email"
+          type="email"
+          class="form-control"
+          placeholder="you@example.com"
+          required
+        />
+        <div class="invalid-feedback">
+          Please enter a valid email
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div class="mb-4">
+        <label for="password" class="form-label">Password</label>
+        <input
+          name="password"
+          id="password"
+          type="password"
+          class="form-control"
+          placeholder="Create a strong password"
+          required
+        />
+        <div class="invalid-feedback">
+          Password is required
+        </div>
+      </div>
+
+      <!-- Submit -->
+      <button class="btn btn-dark auth-btn w-100">
+        Sign Up
+      </button>
+
+    </form>
+
+    <!-- Divider -->
+    <div class="auth-divider">
+      <span>Already have an account?</span>
+    </div>
+
+    <!-- Login link -->
+    <a href="/login" class="auth-link">
+      Log in instead
+    </a>
+
+  </div>
+
+</div>

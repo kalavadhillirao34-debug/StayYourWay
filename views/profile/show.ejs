@@ -1,0 +1,30 @@
+<% layout("layouts/boilerplate") %>
+
+<div class="profile-container">
+
+  <div class="profile-card">
+
+    <!-- Avatar -->
+    <img
+      src="<%= currentUser.avatar?.url || 'https://res.cloudinary.com/demo/image/upload/v1690000000/default-avatar.png' %>"
+      class="profile-avatar"
+      alt="User Avatar"
+    />
+
+    <!-- User Info -->
+    <h2>@<%= currentUser.username %></h2>
+    <p class="profile-email"><%= currentUser.email %></p>
+
+    <p class="profile-bio">
+      <%= currentUser.bio || "No bio added yet." %>
+    </p>
+
+    <a href="/profile/edit" class="btn btn-outline-dark mt-3">
+      Edit Profile
+    </a>
+
+  </div>
+
+</div>
+
+

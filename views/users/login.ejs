@@ -1,0 +1,68 @@
+<% layout('layouts/boilerplate') -%>
+
+<div class="auth-page">
+
+  <div class="auth-card animate-form">
+
+    <!-- Heading -->
+    <h2 class="auth-title">Welcome back</h2>
+    <p class="auth-subtitle">
+      Log in to continue to <b>Stay Your Way</b>
+    </p>
+
+    <form action="/login" method="POST" class="needs-validation" novalidate>
+
+      <!-- Username -->
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input
+          name="username"
+          id="username"
+          type="text"
+          class="form-control"
+          placeholder="Enter your username"
+          autocomplete="username"
+          required
+        />
+        <div class="invalid-feedback">
+          Username is required
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div class="mb-4">
+        <label for="password" class="form-label">Password</label>
+        <input
+          name="password"
+          id="password"
+          type="password"
+          class="form-control"
+          placeholder="Enter your password"
+          autocomplete="current-password"
+          required
+        />
+        <div class="invalid-feedback">
+          Password is required
+        </div>
+      </div>
+
+      <!-- Submit -->
+      <button class="btn btn-dark auth-btn w-100">
+        Log In
+      </button>
+
+    </form>
+
+    <!-- Divider -->
+    <div class="auth-divider">
+      <span>New to Stay Your Way?</span>
+    </div>
+
+    <!-- Signup link -->
+    <a href="/signup" class="auth-link">
+      Create an account
+    </a>
+
+  </div>
+
+</div>

@@ -1,0 +1,181 @@
+<% layout('layouts/boilerplate') -%>
+
+<div class="show-page">
+
+  <!-- ===================== -->
+  <!-- LISTING DETAILS CARD -->
+  <!-- ===================== -->
+  <div class="details-box animate-form">
+
+    <h3 class="details-title">
+      <%= listing.title %>
+    </h3>
+
+    <!-- IMAGE -->
+    <img
+      src="<%= listing.image?.url || listing.image || 'https://images.unsplash.com/photo-1762770663487-6c03bb94fe84?auto=format&fit=crop&w=900&q=60' %>"
+      class="details-img"
+      alt="Listing Image"
+    />
+
+    <!-- DETAILS TEXT -->
+    <div class="details-text">
+      <p class="details-line text-muted">
+        Hosted by
+        <b><%= listing.owner ? listing.owner.username : "Unknown Host" %></b>
+      </p>
+
+      <p class="details-desc">
+        <%= listing.description %>
+      </p>
+
+      <p class="details-price">
+        ₹ <%= listing.price.toLocaleString("en-IN") %>
+        <span>/ night</span>
+      </p>
+
+      <p class="details-location">
+        📍 <%= listing.location %>, <%= listing.country %>
+      </p>
+    </div>
+
+    <!-- OWNER ACTIONS -->
+    <% if (currentUser && listing.owner && listing.owner._id.equals(currentUser._id)) { %>
+      <div class="details-btn-group">
+        <a href="/listings/<%= listing._id %>/edit" class="edit-btn">
+          Edit
+        </a>
+
+        <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE">
+          <button class="delete-btn">
+            Delete
+          </button>
+        </form>
+      </div>
+    <% } %>
+
+  </div>
+
+  <!-- ===================== -->
+  <!-- MAP SECTION -->
+  <!-- ===================== -->
+  <div class="map-section">
+    <h4>Where you’ll be</h4>
+
+    <div id="map"></div>
+  </div>
+
+  <!-- ===================== -->
+  <!-- REVIEWS SECTION -->
+  <!-- ===================== -->
+  <div class="reviews-section">
+
+    <hr />
+
+    <!-- REVIEW FORM -->
+    <% if (currentUser) { %>
+      <h4>Leave a Review</h4>
+
+      <form
+        action="/listings/<%= listing._id %>/reviews"
+        method="POST"
+        novalidate
+        class="needs-validation"
+      >
+
+        <fieldset class="starability-heart mb-3">
+          <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked />
+          <input type="radio" id="rate1" name="review[rating]" value="1" />
+          <label for="rate1">1 star</label>
+          <input type="radio" id="rate2" name="review[rating]" value="2" />
+          <label for="rate2">2 stars</label>
+          <input type="radio" id="rate3" name="review[rating]" value="3" />
+          <label for="rate3">3 stars</label>
+          <input type="radio" id="rate4" name="review[rating]" value="4" />
+          <label for="rate4">4 stars</label>
+          <input type="radio" id="rate5" name="review[rating]" value="5" />
+          <label for="rate5">5 stars</label>
+        </fieldset>
+
+        <div class="mb-3">
+          <label for="comment" class="form-label">Comments</label>
+          <textarea
+            name="review[comment]"
+            id="comment"
+            rows="4"
+            class="form-control"
+            required
+          ></textarea>
+        </div>
+
+        <button class="btn btn-outline-dark">
+          Submit
+        </button>
+      </form>
+
+    <% } else { %>
+      <div class="login-review-prompt">
+        <p>Want to leave a review?</p>
+        <a href="/login" class="login-review-btn">Log in</a>
+      </div>
+    <% } %>
+
+    <hr />
+
+    <!-- ALL REVIEWS -->
+    <p><b>All Reviews</b></p>
+
+    <div class="row">
+      <% for (let review of listing.reviews) { %>
+        <div class="card col-md-5 ms-3 mb-3">
+          <div class="card-body">
+            <h5 class="card-title">
+              @<%= review.author ? review.author.username : "Anonymous" %>
+            </h5>
+
+            <p class="starability-result" data-rating="<%= review.rating %>"></p>
+
+            <p class="card-text">
+              <%= review.comment %>
+            </p>
+          </div>
+
+          <% if (currentUser && review.author && review.author._id.equals(currentUser._id)) { %>
+            <form
+              method="POST"
+              action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE"
+            >
+              <button class="btn btn-sm btn-dark mb-3">
+                Delete
+              </button>
+            </form>
+          <% } %>
+        </div>
+      <% } %>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ===================== -->
+<!-- MAP SCRIPT -->
+<!-- ===================== -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const coords = <%- JSON.stringify(listing.geometry.coordinates) %>;
+
+    const map = L.map("map").setView([coords[1], coords[0]], 11);
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: "© OpenStreetMap contributors"
+    }).addTo(map);
+
+    L.marker([coords[1], coords[0]])
+      .addTo(map)
+      .bindPopup("<b><%= listing.title %></b><br><%= listing.location %>")
+      .openPopup();
+
+    setTimeout(() => map.invalidateSize(), 200);
+  });
+</script>

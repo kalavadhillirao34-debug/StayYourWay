@@ -1,0 +1,18 @@
+<% layout("layouts/boilerplate") %>
+
+<div class="profile-card">
+  <img src="<%= user.avatar.url %>" class="profile-avatar" />
+
+  <h2>@<%= user.username %></h2>
+  <p class="profile-email"><%= user.email %></p>
+
+  <% if (user.bio) { %>
+    <p class="profile-bio"><%= user.bio %></p>
+  <% } else { %>
+    <p class="profile-bio muted">No bio added yet</p>
+  <% } %>
+
+  <a href="/profile/edit" class="btn btn-outline-dark">
+    Edit Profile
+  </a>
+</div>

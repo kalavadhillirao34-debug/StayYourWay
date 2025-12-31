@@ -1,0 +1,91 @@
+<% layout("layouts/boilerplate") %>
+
+<div class="auth-page">
+
+  <div class="my-listings-wrapper animate-form">
+
+    <!-- Page title -->
+    <h2 class="page-title text-center mb-4">
+      My Listings
+    </h2>
+
+    <% if (listings.length === 0) { %>
+
+      <!-- EMPTY STATE -->
+      <div class="empty-state text-center">
+        <p class="text-muted mb-3">
+          You haven’t added any listings yet.
+        </p>
+
+        <a href="/listings/new" class="btn btn-dark px-4">
+          Add your first listing
+        </a>
+      </div>
+
+    <% } else { %>
+
+      <!-- LISTINGS GRID -->
+      <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1 g-4">
+
+        <% for (let listing of listings) { %>
+
+          <div class="col">
+            <div class="listing-card my-listing-card">
+
+              <!-- IMAGE -->
+              <img
+                src="<%= listing.image?.url || listing.image %>"
+                class="card-img-top"
+                alt="Listing image"
+              />
+
+              <!-- CONTENT -->
+              <div class="card-body">
+
+                <p class="card-text mb-2">
+                  <b><%= listing.title %></b><br />
+                  ₹ <%= listing.price.toLocaleString("en-IN") %> / night
+                </p>
+
+                <!-- ACTIONS -->
+                <div class="d-flex gap-2 mt-2">
+                  <a
+                    href="/listings/<%= listing._id %>"
+                    class="btn btn-outline-dark btn-sm w-100"
+                  >
+                    View
+                  </a>
+
+                  <a
+                    href="/listings/<%= listing._id %>/edit"
+                    class="btn btn-outline-secondary btn-sm w-100"
+                  >
+                    Edit
+                  </a>
+                </div>
+
+                <!-- DELETE -->
+                <form
+                  action="/listings/<%= listing._id %>?_method=DELETE"
+                  method="POST"
+                  class="mt-2"
+                  onsubmit="return confirm('Are you sure you want to delete this listing?')"
+                >
+                  <button class="btn btn-danger btn-sm w-100">
+                    Delete
+                  </button>
+                </form>
+
+              </div>
+            </div>
+          </div>
+
+        <% } %>
+
+      </div>
+
+    <% } %>
+
+  </div>
+
+</div>

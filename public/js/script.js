@@ -61,32 +61,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-/* ============================
-   TAX TOGGLE (ON / OFF)
-============================ */
-// const taxToggle = document.getElementById("taxToggle");
-// const prices = document.querySelectorAll(".listing-price");
-
-// taxToggle?.addEventListener("change", () => {
-//   prices.forEach(priceEl => {
-//     const basePrice = Number(priceEl.dataset.price);
-//     const priceSpan = priceEl.querySelector(".price-value");
-
-//     priceSpan.classList.add("animate");
-
-//     setTimeout(() => {
-//       if (taxToggle.checked) {
-//         const total = Math.round(basePrice * 1.18); // 18% tax
-//         priceSpan.innerText = `₹ ${total.toLocaleString("en-IN")}`;
-//       } else {
-//         priceSpan.innerText = `₹ ${basePrice.toLocaleString("en-IN")}`;
-//       }
-
-//       priceSpan.classList.remove("animate");
-//     }, 200);
-//   });
-// });
-
 document.addEventListener("DOMContentLoaded", () => {
   const taxToggle = document.getElementById("taxToggle");
   const prices = document.querySelectorAll(".listing-price");
@@ -138,6 +112,20 @@ applyBtn?.addEventListener("click", () => {
   url.searchParams.set("maxPrice", range.value);
   window.location.href = url.toString();
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const flashMessages = document.querySelectorAll(".flash-msg");
+
+  flashMessages.forEach(msg => {
+    setTimeout(() => {
+      msg.classList.remove("show");
+      msg.classList.add("fade");
+
+      setTimeout(() => msg.remove(), 300); // remove from DOM
+    }, 1000); // ⏱ 3 seconds
+  });
+});
+
 
 
 

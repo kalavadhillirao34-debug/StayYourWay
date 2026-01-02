@@ -1,4 +1,4 @@
-<% layout("layouts/boilerplate") %>
+<!-- <% layout("layouts/boilerplate") %>
 
 <h3 class="page-title">Your Wishlist ❤️</h3>
 
@@ -20,4 +20,38 @@
       </div>
     <% } %>
   </div>
-<% } %>
+<% } %> -->
+
+<% layout("layouts/boilerplate") %>
+
+<div class="container mt-4">
+  <h3 class="page-title text-start mb-4">Your Wishlist ❤️</h3>
+
+  <% if (listings.length === 0) { %>
+    <div class="empty-state text-center mt-5">
+      <i class="fa-regular fa-heart fa-3x mb-3 text-muted"></i>
+      <p class="text-muted">No saved listings yet.</p>
+      <a href="/listings" class="btn btn-danger rounded-pill">Explore Stays</a>
+    </div>
+  <% } else { %>
+    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4">
+      <% for (let listing of listings) { %>
+        <div class="col">
+          <a href="/listings/<%= listing._id %>" class="lisclas">
+            <div class="listing-card h-100">
+              <div class="listing-img-wrapper">
+                 <img src="<%= listing.image.url %>" class="card-img-top" alt="listing image" />
+              </div>
+              <div class="card-body px-1 py-2">
+                <p class="listing-title mb-1"><b><%= listing.title %></b></p>
+                <p class="listing-price mb-0">
+                    ₹ <%= listing.price.toLocaleString("en-IN") %> <span class="text-muted fw-normal">/ night</span>
+                </p>
+              </div>
+            </div>
+          </a>
+        </div>
+      <% } %>
+    </div>
+  <% } %>
+</div>

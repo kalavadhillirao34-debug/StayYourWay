@@ -1,4 +1,4 @@
-<% layout("layouts/boilerplate") %>
+<!-- <% layout("layouts/boilerplate") %>
 
 <div class="profile-card">
   <img src="<%= user.avatar.url %>" class="profile-avatar" />
@@ -15,4 +15,47 @@
   <a href="/profile/edit" class="btn btn-outline-dark">
     Edit Profile
   </a>
+</div> -->
+
+
+<% layout("layouts/boilerplate") %>
+
+<div class="profile-wrapper">
+  <div class="profile-card">
+    <div class="profile-avatar-container">
+      <img src="<%= user.avatar.url %>" class="profile-avatar" alt="User Avatar" />
+      <div class="verified-badge" title="Verified User">
+        <i class="fa-solid fa-shield-check"></i>
+      </div>
+    </div>
+
+    <h2 class="profile-name">@<%= user.username %></h2>
+    <span class="profile-handle"><%= user.email %></span>
+
+    <% if (user.bio) { %>
+      <p class="profile-bio"><%= user.bio %></p>
+    <% } else { %>
+      <p class="profile-bio muted">Welcome to my profile! I haven't added a bio yet.</p>
+    <% } %>
+
+    <div class="profile-stats">
+      <div class="stat-item">
+        <span class="stat-value">Host</span>
+        <span class="stat-label">Identity</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value"><%= new Date(user.createdAt).getFullYear() || '2024' %></span>
+        <span class="stat-label">Joined</span>
+      </div>
+    </div>
+
+    <div class="profile-actions">
+      <a href="/profile/edit" class="btn-profile-edit">
+        <i class="fa-solid fa-pen-to-square"></i> Edit Profile
+      </a>
+      <a href="/logout" class="btn-profile-logout">
+        <i class="fa-solid fa-right-from-bracket"></i> Logout
+      </a>
+    </div>
+  </div>
 </div>

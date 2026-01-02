@@ -1,17 +1,16 @@
-<% layout("layouts/boilerplate") %>
+<!-- <% layout("layouts/boilerplate") %>
 
 <div class="profile-container">
 
   <div class="profile-card">
 
-    <!-- Avatar -->
     <img
       src="<%= currentUser.avatar?.url || 'https://res.cloudinary.com/demo/image/upload/v1690000000/default-avatar.png' %>"
       class="profile-avatar"
       alt="User Avatar"
     />
 
-    <!-- User Info -->
+  
     <h2>@<%= currentUser.username %></h2>
     <p class="profile-email"><%= currentUser.email %></p>
 
@@ -27,4 +26,33 @@
 
 </div>
 
+ -->
 
+ <% layout("layouts/boilerplate") %>
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-11 col-md-8 col-lg-6">
+      
+      <div class="profile-card animate-form">
+        <img
+          src="<%= currentUser.avatar?.url || 'https://res.cloudinary.com/demo/image/upload/v1690000000/default-avatar.png' %>"
+          class="profile-avatar"
+          alt="User Avatar"
+        />
+
+        <h2 class="mt-3">@<%= currentUser.username %></h2>
+        <p class="profile-email"><%= currentUser.email %></p>
+
+        <p class="profile-bio">
+          <%= currentUser.bio || "No bio added yet." %>
+        </p>
+
+        <a href="/profile/edit" class="btn btn-outline-dark mt-3 w-100 w-md-auto">
+          Edit Profile
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>

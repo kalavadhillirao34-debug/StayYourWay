@@ -17,8 +17,8 @@
         <a href="#listings-section" class="hero-btn primary">
           Explore stays
         </a>
-        <a href="#listings-section" class="hero-btn primary">
-          Explore stays
+        <a href="/listings/new" class="hero-btn primary">
+          Host Your Home
         </a>
       </div>
     </div>
@@ -71,7 +71,7 @@
             <input type="checkbox" id="taxToggle">
             <span class="slider"></span>
           </label></span>
-      </div>
+      
 
       <!-- PRICE RANGE -->
       <div class="filter-card">
@@ -86,13 +86,15 @@
           Apply
         </button>
       </div>
+      </div>
 
     </div>
   </div>
 
 <!-- LISTINGS GRID -->
 <div id="listings-section">
-  <div class="row row-cols-xl-4 row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-4" id="listingGrid">
+  <!-- <div class="row row-cols-xl-4 row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-4" id="listingGrid"> -->
+    <div class="row row-cols-xxl-4 row-cols-lg-4 row-cols-md-2 row-cols-1 g-4" id="listingGrid">
 
     <% for (let listing of allListings) { %>
       <div class="col">

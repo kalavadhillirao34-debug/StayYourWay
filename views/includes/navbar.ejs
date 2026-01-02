@@ -2,7 +2,7 @@
   <div class="container-fluid">
 
     <!-- BRAND ICON -->
-    <a class="navbar-brand" href="/">
+    <a class="navbar-brand" href="/listings">
       <i class="fa-solid fa-archway"></i>
     </a>
 
@@ -48,13 +48,13 @@
       <!-- RIGHT AUTH LINKS -->
 <div class="navbar-nav align-items-center">
 
-  <a class="nav-link" href="/listings/new">Host your Home</a>
+  <!-- <a class="nav-link" href="/listings/new">Host your Home</a> -->
 
 
   <% if (currentUser) { %>
 
     <!-- ❤️ Wishlist -->
-    <a class="nav-link" href="listings/wishlist">
+    <a class="nav-link" href="/listings/wishlist">
       ❤️ Wishlist
     </a>
 
@@ -79,7 +79,7 @@
           <a class="dropdown-item" href="/profile/listings">My Listings</a>
         </li>
         <li>
-          <a class="dropdown-item" href="listings/wishlist">Wishlist</a>
+          <a class="dropdown-item" href="/listings/wishlist">Wishlist</a>
         </li>
         <li><hr class="dropdown-divider"></li>
         <li>
